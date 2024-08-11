@@ -1,0 +1,24 @@
+<div id="main-wrapper">
+  <app-header />
+  <app-sidebar />
+  <div class="page-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrums -->
+       <app-breadcrums />
+      <!-- Rutas-->
+       <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+             <router-outlet />
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    2024 Admin Pro by wrappixel
+  </footer>
+</div>
