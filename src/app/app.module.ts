@@ -7,15 +7,18 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NoPageFoundComponent
+    NoPageFoundComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     PagesModule,
     SharedModule,
     AuthModule],
