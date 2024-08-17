@@ -9,20 +9,20 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { FormsModule } from '@angular/forms';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NoPageFoundComponent,
 
-  ],
+@NgModule({
+  declarations: [AppComponent, NoPageFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     PagesModule,
     SharedModule,
-    AuthModule],
-  providers: [],
+    AuthModule,
+
+  ],
+
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

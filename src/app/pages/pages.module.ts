@@ -23,13 +23,15 @@ import { ComponentsModule } from '../components/components.module';
     RouterModule,
     SharedModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+
 ],
   exports: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
     PagesComponent
-  ]
+  ],
+
 })
 export class PagesModule { }
