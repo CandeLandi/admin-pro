@@ -4,8 +4,7 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-const customInitFunctions = () => {
-
+export const customInitFunctions = () => {
   $(function() {
       "use strict";
       $(function() {
@@ -80,7 +79,6 @@ const customInitFunctions = () => {
       $('.floating-labels .form-control').on('focus blur', function(e) {
           $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
       }).trigger('blur');
-
 
       // ==============================================================
       //tooltip

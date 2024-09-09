@@ -21,12 +21,13 @@ export class RxjsComponent implements OnDestroy{
     //   error => console.warn('Error:', error ),
     //   () => console.info('Obs terminado')
     // );
-    this.intervalSubs = this.retornaIntervalo().subscribe( console.log )
+    this.intervalSubs = this.returnInterval().subscribe( console.log )
   }
   ngOnDestroy(): void {
     this.intervalSubs.unsubscribe();
   }
-  retornaIntervalo(): Observable<number> {
+
+  returnInterval(): Observable<number> {
 
     return interval(100)
             .pipe(
