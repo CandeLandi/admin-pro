@@ -9,13 +9,16 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
   const token = localStorage.getItem('token');
 
- return  userService.validateToken()
- .pipe(
-  tap( isAuthenticated => {
-    if(!isAuthenticated){
-      router.navigateByUrl('/login')
-    }
-  })
- )
+  return userService.validateToken().pipe(
+    tap(isAuthenticated => {
+      console.log('isAuthenticated:', isAuthenticated);
+      if (!isAuthenticated) {
+        console.log('Redirigiendo al login');
+        router.navigateByUrl('/login');
+      } else {
+        console.log('Acceso permitido al dashboard');
+      }
+    })
+  );
 
 };

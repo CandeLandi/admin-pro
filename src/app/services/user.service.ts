@@ -3,8 +3,9 @@ import { Injectable, NgZone } from '@angular/core';
 import { environment } from '../environments/environment';
 import { RegisterForm } from '../auth/interfaces/register-form.interface';
 import { LoginForm } from '../auth/interfaces/login-form.interface';
-import { tap, map, catchError, of, Observable } from 'rxjs';
+import { tap, map, catchError, of, Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 declare const google: any;
 
@@ -14,19 +15,34 @@ const base_url = environment.base_url;
   providedIn: 'root',
 })
 export class UserService {
+
+  public user?: User;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private ngZone: NgZone
-  ) {}
+  ) {
+  }
 
   logout() {
+    // Remover el token de localStorage
     localStorage.removeItem('token');
-    google.accounts.id.revoke('landicandela01@gmail.com', () => {
+
+    if (google && google.accounts && google.accounts.id) {
+      // Revocar el token de Google si Google Identity Services está listo
+      google.accounts.id.revoke(this.user?.email, () => {
+        this.ngZone.run(() => {
+          // Redirigir al login después de revocar el token
+          this.router.navigateByUrl('/login');
+        });
+      });
+    } else {
+      // Si Google Identity Services no está listo, solo realizar el logout normal
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
       });
-    });
+    }
   }
 
   validateToken(): Observable<boolean> {
@@ -39,13 +55,17 @@ export class UserService {
         },
       })
       .pipe(
-        tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
+        map((resp: any) => {
+          const { email, google, name, role, img = '', uid } = resp.user;
+
+          this.user = new User(name, email, '', img, google, role, uid);
+          localStorage.setItem('token', resp.token); // Almacenar el nuevo token
+          return true;
         }),
-        map((resp) => true),
-        catchError((error) => of(false))
+        catchError(error => of(false))
       );
   }
+
 
   createUser(formData: RegisterForm) {
     return this.http.post(`${base_url}/users`, formData).pipe(
@@ -66,7 +86,6 @@ export class UserService {
   loginGoogle(token: string) {
     return this.http.post(`${base_url}/login/google`, { token }).pipe(
       tap((resp: any) => {
-        console.log(resp);
         localStorage.setItem('token', resp.token);
       })
     );
