@@ -16,7 +16,8 @@ export class SidebarService {
       { title: 'Graphics', url: 'grafica1'},
       { title: 'Settings', url: 'account-settings'},
       { title: 'Promises', url: 'promises'},
-      { title: 'Rxjs', url: 'rxjs'}
+      { title: 'Rxjs', url: 'rxjs'},
+      { title: 'Profile', url: 'profile'}
     ]
   }
   ]

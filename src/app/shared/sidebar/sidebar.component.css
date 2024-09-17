@@ -1,0 +1,8 @@
+.collapse {
+  display: none;
+}
+
+.collapse.show, .active > .collapse {
+  display: block !important;
+}
+

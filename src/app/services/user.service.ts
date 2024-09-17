@@ -25,20 +25,26 @@ export class UserService {
   ) {
   }
 
+  get uid():string {
+    return this.user!.uid || '';
+  }
+  get token(): string{
+  return localStorage.getItem('token') || '';
+  }
+
+
   logout() {
-    // Remover el token de localStorage
+
     localStorage.removeItem('token');
 
     if (google && google.accounts && google.accounts.id) {
-      // Revocar el token de Google si Google Identity Services está listo
+
       google.accounts.id.revoke(this.user?.email, () => {
         this.ngZone.run(() => {
-          // Redirigir al login después de revocar el token
           this.router.navigateByUrl('/login');
         });
       });
     } else {
-      // Si Google Identity Services no está listo, solo realizar el logout normal
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
       });
@@ -51,7 +57,7 @@ export class UserService {
     return this.http
       .get(`${base_url}/login/renew`, {
         headers: {
-          'x-token': token,
+          'x-token': this.token,
         },
       })
       .pipe(
@@ -73,6 +79,18 @@ export class UserService {
         localStorage.setItem('token', resp.token);
       })
     );
+  }
+
+  updateUser( data: {email:string, name: string, role: string}){
+
+    data = {
+      ...data,
+      role: this.user!.role
+    }
+    return this.http.put(`${base_url}/users/${this.uid}`, data, {
+      headers: {
+        'x-token': this.token,
+  }},)
   }
 
   login(formData: LoginForm) {

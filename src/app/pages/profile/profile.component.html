@@ -1,1 +1,73 @@
-<p>profile works!</p>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card-body bg-white">
+      <h4 class="card-title">My Profile</h4>
+      <h6 class="card-subtitle">Settings</h6>
+      <form [formGroup]="profileForm"
+      (ngSubmit)="updateProfile()" class="form p-t-20">
+        <div class="form-group">
+          <label for="exampleInputuname">User Name</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="ti-user"></i></div>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              id="exampleInputuname"
+              placeholder="Username"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="ti-email"></i></div>
+            <input
+              type="email"
+              class="form-control"
+              formControlName="email"
+              id="exampleInputEmail1"
+              placeholder="Enter email"
+              [readOnly]="user.google"
+            />
+          </div>
+        </div>
+
+        <button
+          [disabled]="profileForm.invalid"
+          type="submit"
+          class="btn btn-success btn-block waves-effect waves-light m-r-10"
+        >
+          Save changes
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card-body bg-white">
+      <h4 class="card-title">Avatar</h4>
+      <h6 class="card-subtitle">User image</h6>s
+      <br>
+      <div class="text-center">
+        <img *ngIf="!imgTemp" [src]="user.imageUrl" class="img-avatar" />
+        <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+      </div>
+
+      <input type="file"
+            (change)="changeImage($any($event.target).files[0])"/>
+
+      <br />
+      <br>
+
+      <button
+        [disabled]="!uploadImg"
+        (click)="uploadImage()"
+        type="button"
+        class="btn btn-success btn-block waves-effect waves-light m-r-10"
+      >
+        Change image
+      </button>
+    </div>
+  </div>
+</div>

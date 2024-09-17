@@ -30,5 +30,20 @@ export class SidebarComponent {
       }
     });
   }
+  toggleMenu(event: Event) {
+    event.preventDefault();  // Evitar el comportamiento predeterminado
+    const element = event.currentTarget as HTMLElement;
+    const parentLi = element.parentElement;
+
+    // Alternar la clase active para abrir o cerrar el submenú
+    if (parentLi?.classList.contains('active')) {
+      parentLi.classList.remove('active');
+      element.setAttribute('aria-expanded', 'false');
+    } else {
+      parentLi?.classList.add('active');
+      element.setAttribute('aria-expanded', 'true');
+    }
+  }
+
 
 }
