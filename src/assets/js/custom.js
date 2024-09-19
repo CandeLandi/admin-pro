@@ -4,7 +4,7 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-export const customInitFunctions = () => {
+const customInitFunctions = () => {
   $(function() {
       "use strict";
       $(function() {
@@ -142,3 +142,5 @@ export const customInitFunctions = () => {
 }
 
 customInitFunctions();
+
+window.customInitFunctions = customInitFunctions;

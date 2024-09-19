@@ -19,14 +19,13 @@ export class SidebarComponent {
                private userService: UserService
    ){
     this.menuItems = sidebarService.menu;
-
+    this.user = this.userService.user;
   }
 
-  ngOnInit() {
+ /*  ngOnInit() {
     // Obtener el usuario del servicio
     this.userService.validateToken().subscribe(isValid => {
       if (isValid) {
-        this.user = this.userService.user;
       }
     });
   }
@@ -43,7 +42,7 @@ export class SidebarComponent {
       parentLi?.classList.add('active');
       element.setAttribute('aria-expanded', 'true');
     }
-  }
+  } */
 
 
 }

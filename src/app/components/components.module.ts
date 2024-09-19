@@ -4,6 +4,7 @@ import { IncreaserComponent } from './increaser/increaser.component';
 import { FormsModule } from '@angular/forms';
 import { DoughnutComponent } from './doughnut/doughnut.component';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { ModalImageComponent } from './modal-image/modal-image.component';
 
 
 
@@ -12,16 +13,18 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
   declarations: [
     IncreaserComponent,
     DoughnutComponent,
+    ModalImageComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     BaseChartDirective,
-  
+
   ],
   exports: [
     IncreaserComponent,
-    DoughnutComponent
+    DoughnutComponent,
+    ModalImageComponent
   ],
   providers: [provideCharts(withDefaultRegisterables())],
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 
 declare function customInitFunctions(): any;
@@ -8,10 +8,15 @@ declare function customInitFunctions(): any;
   templateUrl: './pages.component.html',
   styleUrl: './pages.component.css',
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent implements AfterViewInit {
+
+
   constructor(private settingsServices: SettingsService) {}
 
-  ngOnInit(): void {
-  /*   customInitFunctions(); */
+
+  ngAfterViewInit(): void {
+
+    customInitFunctions();
   }
+
 }
