@@ -1,5 +1,5 @@
 <div class="background-modal-image"
-     [class.hide]="hideModal">
+     [class.hide]="modalImageService.hideModal">
 
   <div class="modal fade show"
        id="exampleModal"
@@ -18,10 +18,19 @@
 
               <h3>Select an image</h3>
 
+              <div class="text-center">
+               <img *ngIf="!imgTemp" [src]="modalImageService.img" class="img-avatar" />
+                <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+              </div>
+
+              <input type="file"
+                    (change)="changeImage($any($event.target).files[0])"/>
+
+
             </div>
             <div class="modal-footer">
                 <button (click)="closeModal()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update image</button>
+                <button (click)="uploadImage()" type="button" class="btn btn-primary">Update image</button>
             </div>
         </div>
     </div>

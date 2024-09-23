@@ -12,7 +12,7 @@ export class FileUploadService {
 
   async updateImage(
     file: File ,
-    type: 'users' | 'doctors' | 'hospitals',
+    type: 'users' | 'doctors' | 'hospitals'| any,
     id: string
   ){
     try {
@@ -30,14 +30,16 @@ export class FileUploadService {
 
       const data = await resp.json();
 
+      console.log(data)
+
       if( data.ok ){
-        return data.nameFile;
-      }else {
-        console.log(data.msg)
+        console.log(data.fileName); // Acá ecibo bien el path
+
+        return data.fileName;
+      } else {
+        console.log(data.msg);
         return false;
       }
-
-
     } catch(error) {
       console.log(error)
       return false;
