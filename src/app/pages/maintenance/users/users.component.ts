@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ModalImageService } from '../../../services/modal-image.service';
 import { environment } from '../../../environments/environment';
 import { delay, Subscription } from 'rxjs';
+import { Hospital } from '../../../models/hospital.model';
 
 
 
@@ -29,7 +30,7 @@ export class UsersComponent implements OnInit, OnDestroy{
 
 
   ngOnDestroy(): void {
-    this.imgSubs.unsubscribe();
+    this.imgSubs?.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -71,7 +72,7 @@ export class UsersComponent implements OnInit, OnDestroy{
       return this.users = this.usersTemp;
     }
     this.searchService.search('users', term )
-    .subscribe( resp => {
+    .subscribe( (  resp: any) => {
       this.users = resp;
     })
     return true;

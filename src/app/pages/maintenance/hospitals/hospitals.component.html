@@ -1,0 +1,96 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search Hospital..."
+          #txtTerm
+          (keyup)="search( txtTerm.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Charging...</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Please wait</p>
+    </div>
+  </div>
+</div>
+
+<div ngClass="bg-white" *ngIf="!loading" class="row">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-8">
+        <h4 class="card-title">Hospitals {{ hospitals.length }}</h4>
+        <h6 class="card-subtitle">Registered hospitals</h6>
+      </div>
+      <div class="col">
+        <div class="text-right mb-2">
+          <button (click)="openSweetAlert()"
+                  class="btn btn-secondary">
+            <i class="fa fa-hospital-o"></i>
+            Create Hospital
+          </button>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+      <table class="table table-bordered bg-white">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th class="text-nowrap">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hospital of hospitals">
+            <td >
+              <img
+                (click)="openModal(hospital)"
+                [src]="hospital.img | imagePipe : 'hospitals'"
+                [alt]="hospital.name"
+                class="w100 cursor"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control w-100"
+                placeholder="Hospital name"
+                [(ngModel)]="hospital.name"
+              />
+            </td>
+
+            <td class="text-nowrap text-center">
+
+              <a (click)="saveChanges(hospital)"
+                          data-toggle="tooltip"
+                          data-original-title="Edit"
+                          class="cursor w-100 "
+                          data-original-title="Save changes">
+                <i class="fa fa-save text-inverse m-r-15"></i>
+              </a>
+              <a (click)="deleteHospital(hospital)"
+                          data-toggle="tooltip"
+                          class="cursor"
+                          data-original-title="Close">
+                <i class="fa fa-close text-danger"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-secondary">Previous</button>
+    <button class="btn btn-secondary">Following</button>
+  </div>
+</div>

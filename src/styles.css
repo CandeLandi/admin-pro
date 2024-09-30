@@ -37,6 +37,13 @@
 .w100 {
   width: 100px;
 }
+.w200 {
+  width: 200px;
+}
+
+.w-80 {
+  width: 90px;
+}
 
 .avatar {
   border: 2px solid rgba(0, 0, 0, 0.185);

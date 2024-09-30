@@ -1,0 +1,90 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          type="text"
+          (keyup)="search(txtTerm.value)"
+          #txtTerm
+          class="form-control"
+          placeholder="Find User..."
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn fast" *ngIf="loading">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Charging...</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Please wait</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="card-body bg-white">
+    <div class="row">
+      <div class="col-8">
+        <h4 class="card-title">Doctors ({{ doctors.length }})</h4>
+        <h6 class="card-subtitle">Registered Doctors</h6>
+        <br />
+      </div>
+
+      <div class="col">
+        <div class="text-right mb-2">
+          <button routerLink="/dashboard/doctor/new" class="btn btn-secondary">
+            <i class="fa fa-hospital-o"></i>
+            Create Doctor
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered bg-white">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th class="w-100">Name</th>
+            <th class="text-nowrap">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doctor of doctors">
+            <td>
+              <img
+                (click)="openModal(doctor)"
+                [src]="doctor.img! | imagePipe : 'doctors'"
+                [alt]="doctor.name"
+                class="w100 cursor"
+              />
+            </td>
+            <td>{{ doctor.name }}</td>
+            <td class="text-nowrap text-center">
+              <a
+                [routerLink]="['/dashboard/doctor', doctor._id]"
+                data-toggle="tooltip"
+                data-original-title="Edit"
+              >
+                <i class="fa fa-pencil text-inverse m-r-10"></i>
+              </a>
+              <a
+                data-toggle="tooltip"
+                data-original-title="Delete"
+                class="cursor"
+                (click)="deleteDoctor(doctor)"
+              >
+                <i class="fa fa-close text-danger"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--     <button class="btn btn-secondary"> Previous </button>
+    <button class="btn btn-secondary"> Following </button> -->
+  </div>
+</div>
