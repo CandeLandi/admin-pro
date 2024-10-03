@@ -13,6 +13,8 @@ import { UsersComponent } from './maintenance/users/users.component';
 import { DoctorsComponent } from './maintenance/doctors/doctors.component';
 import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
 import { DoctorComponent } from './maintenance/doctors/doctor.component';
+import { SearchComponent } from './search/search.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -23,13 +25,16 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, data: { title: 'Dashboard'} },
       { path: 'progress', component: ProgressComponent, data: { title: 'Progress'}  },
       { path: 'grafica1', component: Grafica1Component, data: { title: 'Gráficas'}  },
+      { path: 'search/:term', component: SearchComponent, data: { title: 'Searchs'}  },
       { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Settings'}  },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises'}  },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs'}  },
       { path: 'profile', component: ProfileComponent, data: { title: 'Profile'}  },
 
+      //Admin routes
+      { path: 'users', canActivate: [ AdminGuard ] ,component: UsersComponent, data: { title: 'Users maintenance' }},
+
       //Maintenance
-      { path: 'users', component: UsersComponent, data: { title: 'Users maintenance' }},
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospitals maintenance' }},
       { path: 'doctors', component: DoctorsComponent, data: { title: 'Doctors maintenance' }},
       { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Doctors maintenance' }}

@@ -11,7 +11,7 @@ export class Doctor {
     public name: string,
     public _id?: string,
     public img?: string,
-    public user?: _DoctorUser,
+    public user?: _DoctorUser | any,
     public hospital?: Hospital,
   ) {}
 }

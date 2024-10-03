@@ -15,6 +15,8 @@ export class HospitalsComponent implements OnInit, OnDestroy{
   public hospitals: Hospital[] = [];
   public loading: boolean = true;
   private imgSubs!: Subscription;
+  public desde: number = 0;
+  public totalHospitals: number = 0;
 
   constructor(
     private modalImageService: ModalImageService,
@@ -43,10 +45,24 @@ export class HospitalsComponent implements OnInit, OnDestroy{
   }
 
   loadHospitals() {
-    this.hospitalService.loadHospitals().subscribe((hospitals) => {
-      this.loading = false;
+    this.loading = true;
+    this.hospitalService.loadHospitals(this.desde).subscribe(({ total, hospitals }) => {
+      this.totalHospitals = total;
       this.hospitals = hospitals;
+      this.loading = false;
     });
+  }
+
+  changePage(value: number) {
+    this.desde += value;
+
+    if (this.desde < 0) {
+      this.desde = 0;
+    } else if (this.desde >= this.totalHospitals) {
+      this.desde -= value;
+    }
+
+    this.loadHospitals();
   }
 
   saveChanges(hospital: Hospital) {

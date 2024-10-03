@@ -27,13 +27,16 @@ export class DoctorsService {
   }
 
   loadDoctors(desde: number = 0) {
-    //localhost:3000/api/users?desde=0
-    const url = `${base_url}/doctors`;
-    return this.http.get<Doctor[]>(url, this.headers)
-    .pipe(
-      map( (resp: any) => resp.doctors )
-    )
+    const url = `${base_url}/doctors?desde=${desde}`;
+    return this.http.get<{ doctors: Doctor[], total: number }>(url, this.headers)
+      .pipe(
+        map((resp) => ({
+          total: resp.total,
+          doctors: resp.doctors
+        }))
+      );
   }
+
 
   getDoctorById( id: string ) {
     const url = `${base_url}/doctors/${id}`;

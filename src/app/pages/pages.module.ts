@@ -20,6 +20,7 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsersComponent } from './maintenance/users/users.component';
 import { DoctorComponent } from './maintenance/doctors/doctor.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DoctorComponent } from './maintenance/doctors/doctor.component';
     RxjsComponent,
     UsersComponent,
     DoctorComponent,
+    SearchComponent,
 
   ],
   imports: [

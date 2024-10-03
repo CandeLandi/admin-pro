@@ -90,7 +90,8 @@
       </table>
     </div>
 
-    <button class="btn btn-secondary">Previous</button>
-    <button class="btn btn-secondary">Following</button>
+    <button (click)="changePage(-5)" class="btn btn-secondary">Previous</button>
+    &nbsp;
+    <button (click)="changePage(5)" class="btn btn-secondary">Next</button>
   </div>
 </div>

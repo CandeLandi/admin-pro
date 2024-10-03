@@ -11,38 +11,14 @@ import { User } from '../../models/user.model';
 })
 export class SidebarComponent {
 
-  menuItems: any[];
-
   public user?: User;
 
-  constructor( private sidebarService: SidebarService,
+  constructor( public sidebarService: SidebarService,
                private userService: UserService
    ){
-    this.menuItems = sidebarService.menu;
     this.user = this.userService.user;
   }
 
- /*  ngOnInit() {
-    // Obtener el usuario del servicio
-    this.userService.validateToken().subscribe(isValid => {
-      if (isValid) {
-      }
-    });
-  }
-  toggleMenu(event: Event) {
-    event.preventDefault();  // Evitar el comportamiento predeterminado
-    const element = event.currentTarget as HTMLElement;
-    const parentLi = element.parentElement;
-
-    // Alternar la clase active para abrir o cerrar el submenú
-    if (parentLi?.classList.contains('active')) {
-      parentLi.classList.remove('active');
-      element.setAttribute('aria-expanded', 'false');
-    } else {
-      parentLi?.classList.add('active');
-      element.setAttribute('aria-expanded', 'true');
-    }
-  } */
 
 
 }

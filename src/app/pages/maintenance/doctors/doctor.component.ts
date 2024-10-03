@@ -46,8 +46,8 @@ export class DoctorComponent implements OnInit {
 
   loadDoctor(id: string) {
 
-    if (id === 'nuevo') {
-      return;
+    if(id === 'new') {
+      return
     }
 
     this.doctorService.getDoctorById(id)
@@ -56,6 +56,7 @@ export class DoctorComponent implements OnInit {
         delay(100)
       )
       .subscribe((doctor) => {
+
         if (!doctor) {
           return this.router.navigateByUrl(`/dashboard/doctors`);
         }
@@ -75,7 +76,7 @@ export class DoctorComponent implements OnInit {
   }
 
   loadHospitals() {
-    this.hospitalService.loadHospitals().subscribe((hospitals: Hospital[]) => {
+    this.hospitalService.loadHospitals().subscribe(({hospitals}) => {
       /*        console.log(hospitals); */
       this.hospitals = hospitals;
     });

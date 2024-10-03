@@ -29,13 +29,16 @@ export class HospitalService {
   }
 
   loadHospitals(desde: number = 0) {
-    //localhost:3000/api/users?desde=0
-    const url = `${base_url}/hospitals`;
-    return this.http.get<Hospital[]>(url, this.headers)
-    .pipe(
-      map( (resp: any) => resp.hospitals )
-    )
+    const url = `${base_url}/hospitals?desde=${desde}`;
+    return this.http.get<{ hospitals: Hospital[], total: number }>(url, this.headers)
+      .pipe(
+        map((resp) => ({
+          total: resp.total,
+          hospitals: resp.hospitals
+        }))
+      );
   }
+
 
   createHospital( name: string ) {
     //localhost:3000/api/users?desde=0
