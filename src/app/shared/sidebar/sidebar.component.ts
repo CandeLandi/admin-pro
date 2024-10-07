@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { SidebarService } from '../../services/sidebar.service';
 import { UserService } from '../../services/user.service';
@@ -9,7 +9,7 @@ import { User } from '../../models/user.model';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
   public user?: User;
 
@@ -18,6 +18,10 @@ export class SidebarComponent {
    ){
     this.user = this.userService.user;
   }
+  ngOnInit(): void {
+   this.sidebarService.loadMenu();
+  }
+
 
 
 

@@ -5,17 +5,15 @@
   <!-- Sidebar scroll-->
   <div class="scroll-sidebar">
       <!-- Sidebar navigation-->
-      <nav class="sidebar-nav">
+      <nav class="sidebar-nav p-2">
           <ul id="sidebarnav">
               <li class="user-profile">
-                  <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
-                      <img [src]="user!.imageUrl" alt="user" />
+                  <a class="has-arrow waves-effect waves-dark d-flex align-items-center" aria-expanded="false">
+                      <img class="profile-img me-2" [src]="user!.imageUrl" />
                       <span class="hide-menu">{{ user!.name }} </span>
                   </a>
                   <ul aria-expanded="false" class="collapse">
-                      <li><a routerLinkActive="active" routerLink="./perfil">My Profile </a></li>
-                      <li><a href="javascript:void()">My Balance</a></li>
-                      <li><a href="javascript:void()">Inbox</a></li>
+                      <li><a routerLinkActive="active" routerLink="./profile">My Profile </a></li>
                       <li><a routerLink="account-settings">Account Setting</a></li>
                       <li><a routerLink="/login">Logout</a></li>
                   </ul>
