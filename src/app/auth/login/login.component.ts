@@ -3,9 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
+import { environment } from '../../environments/environment';
 
 declare const google: any;
-declare const gapi:any;
+
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,9 @@ export class LoginComponent implements AfterViewInit {
 
   public formSubmitted = false;
   public auth2: any;
+  public clientId = environment.client_id;
+
+
 
   public loginForm = this.fb.group({
     email: [
@@ -43,8 +47,7 @@ export class LoginComponent implements AfterViewInit {
 
   googleInit() {
     google.accounts.id.initialize({
-      client_id:
-        '863067665849-293q002qi6kbluh33koknna77ss16r70.apps.googleusercontent.com',
+      client_id: this.clientId,
       callback: (response: any) => this.handleCredentialResponse(response),
     });
     google.accounts.id.renderButton(
